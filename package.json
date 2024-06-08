@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "chai": "^4.3.4",
+    "chromedriver": "^125.0.1"
+  }
+}

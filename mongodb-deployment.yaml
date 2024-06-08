@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  namespace: netflix-clone-devops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:latest  # Specifies the Docker image to use
+        ports:
+        - containerPort: 5000  # The port MongoDB listens on inside the container
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: netflix-clone-devops
+spec:
+  ports:
+  - port: 5000  # Corrected to match MongoDB's default port
+    targetPort: 5000  # Ensures traffic is routed to the correct container port
+  selector:
+    app: mongodb
